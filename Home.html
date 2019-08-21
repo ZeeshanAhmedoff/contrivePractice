@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<script>
+  function addElement(){
+
+  }
+</script>
+<html>
+  <style></style>
+    <head><script
+        src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+      </head>
+<body>
+<form id="form" action="ajax/formSubmission.php" method="POST">
+    <div id="formDiv">
+    <p>Choose your image and click Upload</p>
+    <input  type="file" name="pic" accept="image/*" onchange="readURL(this)">
+    <input type="button" id="upload" value="upload">
+    <img id="blash" src="#" alt="your image" />
+    <br>
+    <br>
+    <div id="degDetails" class="col-lg-12">
+    <div class="row">
+      <input type="text" name="degTitle" id="title"  placeholder="Enter the Degree title " class="form-control col-lg-3">
+      <input type="text" id="title"  placeholder="Enter the Passing year " class="form-control col-lg-3">
+      <select  class="browser-default custom-select custom-select-sm mb-3 col-lg-3" onchange="getDetails(this)" >
+        <option value="MATRIC">Matric</option>
+        <option value="FSC">FSC</option>
+        <option value="OLevel">O Level</option>
+        <option value="ALevel">A Level</option>
+        <option value="Bachelor">Bachelor</option> 
+    </select>
+    </div>
+    </div>
+    <br />
+    </div>
+    <input class="btn btn-primary" type="button" id="addMore" value="Add More degree" onclick="">
+    <input type="submit" value="submit"/>
+</form>
+
+<script type="text/javascript">
+  divCounter=0;
+  flag=0;
+  function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#blash')
+                    .attr('src', e.target.result)
+                    .width(250)
+                    .height(200);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+  } 
+  function checkAndRemoveById(d) {
+    console.log('div is',d);
+    console.log('div name is',d.attr("name"));
+    if(d.attr("name")!=null) {
+          var ele = document.getElementById(d.attr("name"));
+          console.log('element is ', ele);
+          ele?ele.remove():false;
+    } else {
+      console.log('in the function');
+      return;
+    }
+  }
+
+  $("#addMore").click(function(){
+    // $('#parent').append('<div id=divId></div>');    
+    $("#formDiv").append(document.getElementById('degDetails').outerHTML)
+  });
+  //var activeId=null;  
+  function getDetails(data) {
+    var activeId=null;
+    console.log('new field is ',data);
+    console.log(data.value);
+    var d=$(data).closest("div");
+     //d.attr("name",activeId);
+    console.log('d attribute before change',d.attr("name"));
+    divCounter=divCounter+1;
+    //console.log('closest div is ',d);
+    var value = data.value;
+    if((value==="MATRIC" || value==="FSC") ){
+        checkAndRemoveById(d); 
+        var newMarksDiv = $(document.createElement('input'))
+         .attr("id", "marksDiv");
+         newMarksDiv.attr("name","marks")
+         newMarksDiv.attr("placeholder","Enter your marks")
+         newMarksDiv.appendTo(d);
+         activeId="marksDiv";
+         d.attr("name",activeId);
+    }
+    else if((value==="OLevel" || value==="ALevel")){
+      // var d=$(data).closest("div");
+        checkAndRemoveById(d)
+        var myOptions = {
+            val1 : 'A',
+            val2 : 'A+',
+            val3 : 'B',
+            val4 : 'B+',
+            val5 : 'B-',
+        };
+        var _select = $(document.createElement('select'))
+         .attr("id", 'selectGrade');
+         
+        $.each(myOptions, function(val, text) {
+            _select.append($('<option></option>').val(val).html(text));
+        });
+        _select.addClass('browser-default custom-select custom-select-sm mb-3 col-lg-3');
+        _select.appendTo(d);
+        // var newMarksDiv = $(document.createElement('input'))
+        //  .attr("id", 'marksDiv');
+         activeId="selectGrade"
+         d.attr("name",activeId);
+         console.log('div name is set in o level',d.attr("name"));
+    }
+    else if(value==="Bachelor"){
+      //var d=$(data).closest("div");
+      // debugger;
+      console.log('div in bachelor is',d);
+      console.log('name pass to ',d.attr("name"));
+      checkAndRemoveById(d)
+        var myOptions = {
+            val1 : '3.0',
+            val2 : '3.1',
+            val3 : '3.2',
+            val4 : '3.3',
+            val5 : '3.4'
+        };
+        var _select = $(document.createElement('select'))
+         .attr("id", "selectCGPA");
+        $.each(myOptions, function(val, text) {
+            _select.append($('<option></option>').val(val).html(text));
+        });
+        _select.appendTo(d);
+         activeId="selectCGPA"
+         d.attr("name",activeId);
+    }
+  }      
+</script>
+<script src="main.js"></script>
+</body>
+</html>

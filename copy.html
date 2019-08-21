@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html>
+  <style></style>
+    <head><script
+        src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous"></script>
+    </head>
+<body>
+<form id="form">
+    <p>Choose your image and click Upload</p>
+    <input type="file" name="pic" accept="image/*" onchange="readURL(this)">
+    <input type="button" id="upload" value="upload">
+    <img id="blah" src="#" alt="your image" />
+
+    <br>
+    <br>
+    <input type="text" id="title"  placeholder="enter the Degree title ">
+    <select id="deg">
+        <option value="MATRIC">Matric</option>
+        <option value="FSC">FSC</option>
+        <option value="OLevel">O Level</option>
+        <option value="ALevel">A Level</option>
+        <option value="Bachelor">Bachelor</option>
+    </select>
+</form>
+<script type="text/javascript">
+  function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blash')
+                    .attr('src', e.target.result)
+                    .width(150)
+                    .height(200);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+  var flag=true;
+  $( "#deg" )
+  .change(function() {
+    var value = $( this ).val();
+    console.log(value);
+    if((value==="MATRIC" || value==="FSC") && flag==true ){
+        var newMarksDiv = $(document.createElement('input'))
+         .attr("id", 'marksDiv');
+         newMarksDiv.attr("name","marks")
+         newMarksDiv.attr("placeholder","Enter your marks")
+    // newMarksDiv.after().html(
+    //       '<input type="text" name="marks" id="marks" value="" >');
+         newMarksDiv.appendTo("#form");
+         flag=false;
+    }
+    else if((value==="OLevel" || value==="ALevel") && flag==false){
+        var myOptions = {
+            val1 : 'A',
+            val2 : 'A+',
+            val3 : 'B',
+            val4 : 'B+',
+            val5 : 'B-'
+        };
+        var _select = $(document.createElement('select'))
+         .attr("id", 'select');
+        $.each(myOptions, function(val, text) {
+            _select.append($('<option></option>').val(val).html(text));
+        });
+         $('#form').append(_select);
+        var newMarksDiv = $(document.createElement('input'))
+         .attr("id", 'marksDiv');
+    }
+    else if(value==="Bachelor" && flag==true){
+        var myOptions = {
+            val1 : '3.0',
+            val2 : '3.1',
+            val3 : '3.2',
+            val4 : '3.3',
+            val5 : '3.4'
+        };
+        var _select = $(document.createElement('select'))
+         .attr("id", 'select');
+        $.each(myOptions, function(val, text) {
+            _select.append($('<option></option>').val(val).html(text));
+        });
+         $('#form').append(_select);
+        var newMarksDiv = $(document.createElement('input'))
+         .attr("id", 'marksDiv');
+         flag=false;
+    }
+  })
+ 
+    //   var deg=document.getElementById("#degree");
+    //   console.log(deg);
+      
+</script>
+</body>
+</html>
