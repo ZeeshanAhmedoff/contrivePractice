@@ -1,5 +1,6 @@
 divCounter=0;
   flag=0;
+  var counter=1;
   function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -25,7 +26,8 @@ divCounter=0;
     }
   }
 
-  $("#addMore").click(function(){    
+  $("#addMore").click(function(){
+    counter=counter+1;    
     $("#formDiv").append(document.getElementById('degDetails').outerHTML)
   });
 
