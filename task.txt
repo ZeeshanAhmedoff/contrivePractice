@@ -1,0 +1,20 @@
+Training Day 3:
+
+Front-end validations by validator.io
+Jquery Datepicker for start and end date of each degree, end date cannot be smaller than start date, need this check to be added in jquery datepicker
+
+Read composer
+Autoload file
+Back-end validations:
+Use composer to install packages.
+Php validations by gump which is a composer package
+
+Training Day 4:
+
+Convert all the code into MVC Structure.
+Database separate class
+Validation through gump should have its dedicated class
+Footer should be separate file
+Profile image code should be in separate file
+Education section should be in its own file
+There should be on file let say training.php which will include all these different view files
