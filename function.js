@@ -46,7 +46,7 @@ divCounter=0;
         checkAndRemoveById(d); 
         var newMarksDiv = $(document.createElement('input'))
          .attr("id", "marksDiv");
-         newMarksDiv.attr("name","res")
+         newMarksDiv.attr("name","res[]")
          newMarksDiv.attr("placeholder","Enter your marks")
          newMarksDiv.appendTo(d);
          activeId="marksDiv";
@@ -63,7 +63,7 @@ divCounter=0;
         };
         var _select = $(document.createElement('select'))
          .attr("id", 'selectGrade');
-         _select.attr("name","res")
+         _select.attr("name","res[]")
         $.each(myOptions, function(val, text) {
             _select.append($('<option></option>').val(text).html(text));
         });
@@ -86,7 +86,7 @@ divCounter=0;
         };
         var _select = $(document.createElement('select'))
          .attr("id", "selectCGPA");
-         _select.attr("name","res")
+         _select.attr("name","res[]")
         $.each(myOptions, function(val, text) {
             _select.append($('<option></option>').val(text).html(text));
         });
