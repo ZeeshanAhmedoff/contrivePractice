@@ -1,5 +1,6 @@
 divCounter=0;
   flag=0;
+  var counter=1;
   function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -25,7 +26,8 @@ divCounter=0;
     }
   }
 
-  $("#addMore").click(function(){    
+  $("#addMore").click(function(){
+    counter=counter+1;    
     $("#formDiv").append(document.getElementById('degDetails').outerHTML)
   });
 
@@ -44,7 +46,7 @@ divCounter=0;
         checkAndRemoveById(d); 
         var newMarksDiv = $(document.createElement('input'))
          .attr("id", "marksDiv");
-         newMarksDiv.attr("name","res")
+         newMarksDiv.attr("name","res[]")
          newMarksDiv.attr("placeholder","Enter your marks")
          newMarksDiv.appendTo(d);
          activeId="marksDiv";
@@ -61,7 +63,7 @@ divCounter=0;
         };
         var _select = $(document.createElement('select'))
          .attr("id", 'selectGrade');
-         _select.attr("name","res")
+         _select.attr("name","res[]")
         $.each(myOptions, function(val, text) {
             _select.append($('<option></option>').val(text).html(text));
         });
@@ -84,7 +86,7 @@ divCounter=0;
         };
         var _select = $(document.createElement('select'))
          .attr("id", "selectCGPA");
-         _select.attr("name","res")
+         _select.attr("name","res[]")
         $.each(myOptions, function(val, text) {
             _select.append($('<option></option>').val(text).html(text));
         });

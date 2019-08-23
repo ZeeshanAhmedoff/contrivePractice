@@ -26,9 +26,9 @@
     <br>
     <div id="degDetails" class="col-lg-12">
     <div class="row">
-      <input type="text" name="degTitle" id="title"  placeholder="Enter the Degree title " class="form-control col-lg-3">
-      <input type="text" id="title"  placeholder="Enter the Passing year " class="form-control col-lg-3">
-      <select  class="browser-default custom-select custom-select-sm mb-3 col-lg-3" onchange="getDetails(this)" >
+      <input type="text" name="degTitle[]" id="title"  placeholder="Enter the Degree title " class="form-control col-lg-3">
+      <input type="text" name="PassingYear[]" id="passingYear"  placeholder="Enter the Passing year " class="form-control col-lg-3">
+      <select  class="browser-default custom-select custom-select-sm mb-3 col-lg-3" onchange="getDetails(this)" name="eduLevel">
         <option value="MATRIC">Matric</option>
         <option value="FSC">FSC</option>
         <option value="OLevel">O Level</option>
@@ -90,7 +90,7 @@
         checkAndRemoveById(d); 
         var newMarksDiv = $(document.createElement('input'))
          .attr("id", "marksDiv");
-         newMarksDiv.attr("name","marks")
+         newMarksDiv.attr("name","res[]")
          newMarksDiv.attr("placeholder","Enter your marks")
          newMarksDiv.appendTo(d);
          activeId="marksDiv";
@@ -108,7 +108,7 @@
         };
         var _select = $(document.createElement('select'))
          .attr("id", 'selectGrade');
-         
+         _select.attr("name","res[]")
         $.each(myOptions, function(val, text) {
             _select.append($('<option></option>').val(val).html(text));
         });
@@ -135,6 +135,7 @@
         };
         var _select = $(document.createElement('select'))
          .attr("id", "selectCGPA");
+         _select.attr("name","res[]")
         $.each(myOptions, function(val, text) {
             _select.append($('<option></option>').val(val).html(text));
         });
